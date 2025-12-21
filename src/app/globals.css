@@ -1,3 +1,131 @@
+/* Local Inter font declarations */
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-ThinItalic.ttf") format("truetype");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-ExtraLightItalic.ttf") format("truetype");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-SemiBoldItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-ExtraBoldItalic.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter_18pt-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 @import "tailwindcss";
 
 :root {
@@ -6,10 +134,12 @@
 }
 
 @theme inline {
-  --color-background: var(--background);
+  /* --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-geist-mono); */
+  --color-blue: #0378c8;
+  --color-yellow: #f5a53d;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,7 +150,28 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(354.21deg, #565f6e -590.98%, #151922 100%);
+  @apply text-white;
+}
+.container {
+  @apply max-w-295! mx-auto px-5;
+}
+
+*,
+*::before,
+*::after {
+  transition: opacity 0.3s ease-in-out, color 0.3s ease-in-out,
+    background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+.pos-underline {
+  @apply relative after:absolute after:h-px after:bg-white after:left-0 after:w-0 after:-bottom-1 hover:after:w-full after:transition-all after:duration-300 after:ease-linear;
+}
+
+.swiper-pagination-bullet {
+  @apply bg-blue! opacity-25! rounded-lg! h-2.5! w-2.5! md:h-3.5! md:w-3.5!;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  @apply w-8! md:w-10! opacity-100!;
 }
