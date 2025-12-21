@@ -4,8 +4,11 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Button from "./Cta";
+import emailjs from "@emailjs/browser";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Define validation schema
 const formSchema = z.object({
@@ -26,6 +29,7 @@ type FormData = z.infer<typeof formSchema>;
 
 const GetInTouch = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const form = useRef<HTMLFormElement>(null);
 
   const {
     register,
@@ -39,16 +43,25 @@ const GetInTouch = () => {
     },
   });
 
-  const onSubmit = async (data: FormData) => {
+  const sendEmail = async (data: FormData) => {
+    if (!form.current) return;
+
     try {
       setIsSubmitting(true);
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("Form submitted:", data);
-      // Show success message or redirect
+
+      await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+
+        form.current,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+
+      toast.success("Message sent successfully!");
       reset();
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Failed to send message:", error);
+      toast.error("Failed to send message. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -60,7 +73,8 @@ const GetInTouch = () => {
         Get In Touch
       </h2>
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        ref={form}
+        onSubmit={handleSubmit(sendEmail)}
         className="max-w-[916px] mx-auto space-y-3.5 mt-7 sm:mt-9 lg:mt-11"
       >
         <div className="flex gap-y-3.5 gap-x-6 w-full max-md:flex-col">
@@ -75,9 +89,7 @@ const GetInTouch = () => {
               {...register("name")}
             />
             {errors.name && (
-              <p className="mt-1 text-sm text-red-400!">
-                {errors.name.message}
-              </p>
+              <p className="mt-1 text-sm text-red-400">{errors.name.message}</p>
             )}
           </div>
           <div className="w-full">
@@ -91,7 +103,7 @@ const GetInTouch = () => {
               {...register("phone")}
             />
             {errors.phone && (
-              <p className="mt-1 text-sm text-red-400!">
+              <p className="mt-1 text-sm text-red-400">
                 {errors.phone.message}
               </p>
             )}
@@ -109,7 +121,7 @@ const GetInTouch = () => {
             {...register("email")}
           />
           {errors.email && (
-            <p className="mt-1 text-sm text-red-400!">{errors.email.message}</p>
+            <p className="mt-1 text-sm text-red-400">{errors.email.message}</p>
           )}
         </div>
 
@@ -124,7 +136,7 @@ const GetInTouch = () => {
             {...register("message")}
           />
           {errors.message && (
-            <p className="mt-1 text-sm text-red-400!">
+            <p className="mt-1 text-sm text-red-400">
               {errors.message.message}
             </p>
           )}
@@ -136,7 +148,7 @@ const GetInTouch = () => {
               <input
                 type="checkbox"
                 id="terms"
-                className=" h-5 w-5 rounded-lg bg-transparent border-white/20  text-indigo-600 focus:ring-indigo-500"
+                className="h-5 w-5 rounded-lg bg-transparent border-white/20 text-indigo-600 focus:ring-indigo-500"
                 {...register("terms")}
               />
             </div>
@@ -162,7 +174,7 @@ const GetInTouch = () => {
             </label>
           </div>
           {errors.terms && (
-            <p className="mt-1 text-sm text-red-400!">{errors.terms.message}</p>
+            <p className="mt-1 text-sm text-red-400">{errors.terms.message}</p>
           )}
         </div>
 
@@ -174,6 +186,7 @@ const GetInTouch = () => {
           {isSubmitting ? "Sending..." : "Let's Get Started"}
         </Button>
       </form>
+      <ToastContainer position="bottom-right" />
     </div>
   );
 };
