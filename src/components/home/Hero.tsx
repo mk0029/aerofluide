@@ -2,11 +2,15 @@ import Image from "next/image";
 import React from "react";
 import Button from "../common/Cta";
 
-const Hero = () => {
+const Hero = ({
+  imgUrl = "/assets/img/webp/hero-bg.webp",
+}: {
+  imgUrl?: string;
+}) => {
   return (
     <div className="min-h-[80vh] md:min-h-dvh relative lg:h-180 flex flex-col">
       <Image
-        src="/assets/img/webp/hero-bg.webp"
+        src={imgUrl}
         alt="Hero Background"
         fill
         preload

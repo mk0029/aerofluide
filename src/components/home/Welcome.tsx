@@ -1,6 +1,7 @@
 import React from "react";
 import Icons from "../common/Icons";
 import Image from "next/image";
+import Link from "next/link";
 
 const Welcome = () => {
   const features = [
@@ -52,13 +53,15 @@ const Welcome = () => {
             bespoke Assurance, Testing, Inspection and Certification services to
             customers.
           </p>
-          <button className="flex items-center max-lg:justify-center max-lg:mx-auto gap-2 mt-3gtih md:mt-6 lg:mt-8 bold cursor-pointer group pos-underline">
+          <Link
+            href="/about-us"
+            className="flex items-center max-lg:justify-center max-lg:mx-auto gap-2 mt-3gtih md:mt-6 lg:mt-8 bold cursor-pointer group pos-underline">
             More About Us
             <Icons
               name="arrow"
               className="group-hover:translate-x-1 transition-all! ease-linear! duration-300!"
             />
-          </button>
+          </Link>
         </div>
       </div>
       <div className="flex flex-wrap -mx-3 gap-y-3  sm:gap-y-6 justify-center">
@@ -66,8 +69,7 @@ const Welcome = () => {
           return (
             <div
               className="px-3 w-full sm:w-6/12 w-[976pox]:w-4/12 lg:w-[28%]"
-              key={index}
-            >
+              key={index}>
               <div className="p-3 md:p-5 rounded-xl border border-solid border-white/10 flex items-center gap-3 sm:gap-4 lg:gap-5">
                 <Icons name={obj.icon} className="max-md:scale-75" />{" "}
                 <div className="">

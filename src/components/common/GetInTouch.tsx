@@ -68,15 +68,14 @@ const GetInTouch = () => {
   };
 
   return (
-    <div className="container pt-6 pb-13 sm:pb-18 md:pb-22 lg:pb-30">
+    <div className="container pb-13 sm:pb-18 md:pb-22 lg:pb-30">
       <h2 className="text-center font-bold text-[26px] sm:text-3xl lg:text-[33px] leading-[120%] mb-2 md:mb-3.5">
         Get In Touch
       </h2>
       <form
         ref={form}
         onSubmit={handleSubmit(sendEmail)}
-        className="max-w-[916px] mx-auto space-y-3.5 mt-7 sm:mt-9 lg:mt-11"
-      >
+        className="max-w-229 mx-auto space-y-3.5 mt-7 sm:mt-9 lg:mt-11">
         <div className="flex gap-y-3.5 gap-x-6 w-full max-md:flex-col">
           <div className="w-full">
             <input
@@ -85,7 +84,7 @@ const GetInTouch = () => {
               placeholder="First & Last Name*"
               className={`py-2 md:py-3 px-4 md:px-6 text-white text-base outline-none focus:border-white/30 border border-solid ${
                 errors.name ? "border-red-500" : "border-white/10"
-              } placeholder:text-white/50 bg-[#FAFAFA0F] rounded-[12px] w-full`}
+              } placeholder:text-white/50 bg-[#FAFAFA0F] rounded-xlw-full`}
               {...register("name")}
             />
             {errors.name && (
@@ -154,20 +153,17 @@ const GetInTouch = () => {
             </div>
             <label
               htmlFor="terms"
-              className="text-sm sm:text-base leading-[160%] text-white/70 font-light"
-            >
+              className="text-sm sm:text-base leading-[160%] text-white/70 font-light">
               I agree to{" "}
               <Link
                 className="text-white capitalize underline underline-offset-4"
-                href="/terms"
-              >
+                href="/terms">
                 Terms of Services
               </Link>{" "}
               and{" "}
               <Link
                 className="text-white capitalize underline underline-offset-4"
-                href="/privacy"
-              >
+                href="/privacy">
                 privacy policy
               </Link>
               .
@@ -181,8 +177,7 @@ const GetInTouch = () => {
         <Button
           type="submit"
           className="w-full mt-5 sm:mt-8 lg:mt-10"
-          disabled={isSubmitting}
-        >
+          disabled={isSubmitting}>
           {isSubmitting ? "Sending..." : "Let's Get Started"}
         </Button>
       </form>

@@ -15,11 +15,14 @@ const Header = () => {
     { title: "Contact Us", url: "/contact-us" },
     { title: "Certificates", url: "/certificates" },
   ];
+  const [HeaderHeight, setHeaderHeight] = useState(0);
   const [open, setOpen] = useState(false);
   const [topPosition, setTopPosition] = useState(0);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    const header = document.getElementById("header-main");
+    setHeaderHeight(header?.scrollHeight || 0);
     const handleScroll = () => {
       const topbar = document.getElementById("topbar");
       const height = topbar?.offsetHeight || 0;
@@ -44,11 +47,11 @@ const Header = () => {
 
   return (
     <>
+      {/* <div style={{ minHeight: HeaderHeight || 0 }}></div> */}
       <div
         style={{ top: `${topPosition}px` }}
         id="header-main"
-        className="backdrop-blur-2xl border-b border-white/10 border-solid overflow-x-clip fixed left-0 w-full z-10 transition-all ease-linear duration-300"
-      >
+        className="backdrop-blur-2xl border-b border-white/10 border-solid overflow-x-clip fixed left-0 w-full z-10 transition-all ease-linear duration-300">
         <div className=" container">
           <div className="flex justify-between ">
             <Link href="/" className="py-2 md:py-4">
@@ -73,8 +76,7 @@ const Header = () => {
             <button
               onClick={() => setOpen(true)}
               aria-label="Open menu"
-              className="md:hidden p-2 rounded-lg text-white hover:bg-white/5 focus:outline-none scale-125"
-            >
+              className="md:hidden p-2 rounded-lg text-white hover:bg-white/5 focus:outline-none scale-125">
               <Icons name="menu" />
             </button>
 
@@ -97,8 +99,7 @@ const Header = () => {
                   ? " translate-x-0 opacity-100 pointer-events-auto backdrop-blur-2xl"
                   : " opacity-0 translate-x-full pointer-events-none") +
                 " fixed top-21 right-4 z-50 md:static md:translate-x-0 md:opacity-100 md:pointer-events-auto bg-white/5 md:bg-transparent border border-white/20 md:border-0 md:rounded-none"
-              }
-            >
+              }>
               {/* Close button (mobile only) */}
               <div className="flex justify-end md:hidden absolute z-50 top-2 right-2">
                 <button onClick={() => setOpen(false)} aria-label="Close menu">
@@ -112,8 +113,7 @@ const Header = () => {
                     key={index}
                     href={link.url}
                     onClick={() => setOpen(false)}
-                    className="text-bold capitalize md:opacity-80 hover:opacity-100 md:px-3 py-1 sm:py-2 md:py-4 pos-underline h-full flex items-center"
-                  >
+                    className="text-bold capitalize md:opacity-80 hover:opacity-100 md:px-3 py-1 sm:py-2 md:py-4 pos-underline h-full flex items-center">
                     {link.title}
                   </Link>
                 ))}
